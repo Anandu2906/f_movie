@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <title>CinePhile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/assets/css/custom.css" rel="stylesheet">
+    <style>
+      .checked {
+        color: orange;
+      }
+      #wrapper {
+        width: 500px;
+        margin: 0 auto;
+    }
+      </style>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/assets/css/templatemo-chain-app-dev.css">
+    <link rel="stylesheet" href="static/assets/css/animated.css">
+    <link rel="stylesheet" href="static/assets/css/owl.css">
+
+
+  </head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="index.html" class="logo">
+                <h2>CINEPHILE</h2>
+            </a>
+            <!-- ***** Logo End ***** -->
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+              <li class="scroll-to-section"><a href="/index" class="active">Home</a></li>
+               <li class="scroll-to-section"><a href="/movies">Movies</a></li>
+
+
+              <li><div class="gradient-button"><a  href="/user_signup"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li>
+            </ul>
+            <a class='menu-trigger'>
+                <span>Menu</span>
+            </a>
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+<br><br><br><br>
+
+
+
+<div class="container my-5">
+     <div class="row">
+          <div class="col-md-6">
+               <h3> Review Film</h3>
+              <hr>
+               <div class="row">
+                    {% for item in all %}
+                    
+                    <div class="col-md-12 product_data" >
+                               <div class="card">
+                               <div class="card-body">
+                                <div class="row">
+                                               <a href="">
+                                               <div class="mx-auto" style="width: 200px;" >
+                                                       <img src="{{ item.poster.url }}" alt="Film image" width="200" height="200" />
+                                                </div></a>
+                                              <h4 class="text-center"><input type="hidden" name=""> {{ item.title }}</h4>
+                                                   
+                                              <center>Actors :<span class="text-center">{{ item.actors }}</span></center>
+                                            
+                                            <center>Description :<span class="text-center">{{ item.description }}</span></center></div>
+                                           
+                                            
+                                              <div class="col-md-12">
+
+                                                <form method="post" action="/submit_review">
+                                                  {% csrf_token %}
+                                                 <br><center><font color="red">{{msg}}</font></center><br>
+                                                  <label><b>How do you rate this Movie?</b></label>
+                                                  <br>
+                                                  <div class="rate">
+                                                    <input type="radio" name="rating" id="rating10"  required value="5"><label for="rating10" title="5"></label>
+                                                    <input type="radio" name="rating" id="rating9"  required value="4.5"><label for="rating9" title="4.5" class="half"></label>
+                                                    <input type="radio" name="rating" id="rating8"  required value="4"><label for="rating8" title="4"></label>
+                                                    <input type="radio" name="rating" id="rating7"  required value="3.5"><label for="rating7" title="3.5" class="half"></label>
+                                                    <input type="radio" name="rating" id="rating6"  required value="3"><label for="rating6" title="3"></label>
+                                                    <input type="radio" name="rating" id="rating5"  required value="2.5"><label for="rating5" title="2.5" class="half"></label>
+                                                    <input type="radio" name="rating" id="rating4"  required value="2"><label for="rating4" title="2"></label>
+                                                    <input type="radio" name="rating" id="rating3"  required value="1.5"><label for="rating3" title="1.5" class="half"></label>
+                                                    <input type="radio" name="rating" id="rating2"  required value="1"><label for="rating2" title="1"></label>
+                                                    <input type="radio" name="rating" id="rating1"  required value="0.5"><label for="rating1" title="0.5" class="half"></label>
+                                                  </div>
+                                              </div>
+                                              
+
+                                               <div class="col-md-12">
+                                                
+                                                  <input type="hidden" value="{{ item.id}}" class="prod_id" name="m_id">
+                                                <b>Review Title :</b> <br> 
+                                                <input type="text" class="form-control" name="subject" />
+                                               <b>Review :</b><br>
+                                                <textarea class="form-control" type="text" name="comment" placeholder="Write Your Review" rows="4" ></textarea>
+                                          
+                                              </div>
+                                              <div class="col-md-12">
+                                                <center><br><input class="btn btn-danger shadow-none" type="submit" name="submit" value="Submit"></center>   
+                                                  </div>       
+                                                </div>
+                                              </div>
+      
+                                          </div><br>
+                                      
+                                       </div>
+                               </div>
+                               
+                  
+              </form>
+                    {% endfor %}
+               </div>
+          </div>
+     </div>
+</div>
+
+                       <!--<div class="form-group">
+                            <label for="full-name">Video</label>
+                            <textarea name="description" placeholder="Description" class="form-control"></textarea>
+                        </div>-->
+
+
+
+
+
+                  </div>
+
+
+
+
+                </div>
+              </div>
+
+
+  <footer id="newsletter">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="copyright-text">
+            <p>Copyright © Cinephile. All Rights Reserved.
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <script src="static/vendor/jquery/jquery.min.js"></script>
+  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/assets/js/owl-carousel.js"></script>
+  <script src="static/assets/js/animation.js"></script>
+  <script src="static/assets/js/imagesloaded.js"></script>
+  <script src="static/assets/js/popup.js"></script>
+  <script src="static/assets/js/custom.js"></script>
+</body>
+</html>
